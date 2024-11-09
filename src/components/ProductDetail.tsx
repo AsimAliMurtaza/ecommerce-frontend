@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   Box,
   Typography,
@@ -7,19 +7,22 @@ import {
   Card,
   CardContent,
   CircularProgress,
-  Grid,
   TextField,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import { Product } from "../types/Product";
 import { getProductById } from "../api/products";
+import { useCart } from "../contexts/CartContext";
 
 const ProductDetailPage: React.FC = () => {
-  const { productId } = useParams(); 
+  const { productId } = useParams();
   const [product, setProduct] = useState<Product | null>(null);
-  const [loading, setLoading] = useState<boolean>(true); 
-  const [quantity, setQuantity] = useState<number>(1); 
-  const [error, setError] = useState<string | null>(null); 
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [quantity, setQuantity] = useState<number>(1);
+  const [error, setError] = useState<string | null>(null);
+  const [openSnackbar, setOpenSnackbar] = useState<boolean>(false); // Snackbar state
+  const { addToCart } = useCart();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -27,7 +30,7 @@ const ProductDetailPage: React.FC = () => {
       setError(null);
       try {
         if (productId) {
-          const fetchedProduct = await getProductById(productId); 
+          const fetchedProduct = await getProductById(productId);
           setProduct(fetchedProduct);
         }
       } catch (err) {
@@ -38,16 +41,22 @@ const ProductDetailPage: React.FC = () => {
     };
 
     fetchProduct();
-  }, [productId]); 
+  }, [productId]);
 
   const handleAddToCart = () => {
     if (product) {
-      console.log("Added to cart:", product, "Quantity:", quantity);
+      console.log("Adding product to cart:", product, "Quantity:", quantity);
+      addToCart(product, quantity);
+      setOpenSnackbar(true); // Show snackbar when the product is added
     }
   };
 
   const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuantity(Math.max(1, parseInt(event.target.value)));
+  };
+
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false); // Close the snackbar
   };
 
   if (loading) {
@@ -136,6 +145,17 @@ const ProductDetailPage: React.FC = () => {
           </Button>
         </CardContent>
       </Card>
+
+      {/* Snackbar for success message */}
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: "100%" }}>
+          Product added to cart!
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

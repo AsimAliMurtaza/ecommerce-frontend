@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { login } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import { TextField, Button, Container, Typography, Box } from "@mui/material";
+import { login } from "../api/auth"; // Ensure this is the correct path
 
 const LoginForm: React.FC = () => {
   const navigate = useNavigate();
@@ -12,11 +12,13 @@ const LoginForm: React.FC = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await login(email, password);
-      console.log(response);
-      navigate("/");
-    } catch (err) {
-      setError("Invalid credentials, please try again.");
+      const response = await login(email, password); // Call the updated login function
+      console.log(response); // This should now contain the token and name
+      localStorage.setItem("token", response.token); // Save the token
+      localStorage.setItem("userName", response.name); // Save the user's name (or another field)
+      navigate("/"); // Redirect to homepage
+    } catch (err: any) {
+      setError(err.message); // Display the error message returned from the backend
     }
   };
 

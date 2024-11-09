@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { getProducts } from "../api/products";
 import { Product } from "../types/Product";
-import { Card, CardContent, Typography, Grid, Box, Button } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  Typography,
+  Grid,
+  Box,
+  Button,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const ProductList: React.FC = () => {
@@ -17,7 +24,7 @@ const ProductList: React.FC = () => {
   }, []);
 
   const handleBuyClick = (productId: string) => {
-    navigate(`/product/${productId}`); 
+    navigate(`/product/${productId}`);
   };
 
   return (
@@ -52,7 +59,7 @@ const ProductList: React.FC = () => {
                     marginBottom: 1,
                   }}
                 >
-                  {product.name} + {product._id}
+                  {product.name}
                 </Typography>
                 <Typography
                   variant="body2"
