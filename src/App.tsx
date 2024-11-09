@@ -9,6 +9,8 @@ import ProductDetailPage from "./components/ProductDetail";
 import CartPage from "./pages/CartPage";
 import { CartProvider } from "./contexts/CartContext";
 import { AuthProvider } from "./contexts/AuthContext";
+import { ManageAccounts } from "@mui/icons-material";
+import ManageProductsPage from "./pages/ManageProductsPage";
 
 const App: React.FC = () => {
   return (
@@ -23,6 +25,7 @@ const App: React.FC = () => {
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/product/:productId" element={<ProductDetailPage />} />
             <Route path="/cart" element={<CartPage />} />
+            <Route path="manage-products" element={<ManageProductsPage />} />
           </Routes>
         </Router>
       </CartProvider>

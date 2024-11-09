@@ -1,14 +1,29 @@
 import React, { useState } from "react";
-import { AppBar, Toolbar, Typography, Button, IconButton, Container, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+  Container,
+  Menu,
+  MenuItem,
+  Avatar,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext"; 
+import { useAuth } from "../contexts/AuthContext";
 import { useCart } from "../contexts/CartContext";
 
 const Navbar: React.FC = () => {
-  const { isAuthenticated, userName, logout } = useAuth(); 
+  const { isAuthenticated, userName, logout } = useAuth(); // Assume `session` contains the user info
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null); // Anchor for MUI Menu
   const { cart } = useCart();
 
   const handleClickOpen = () => {
@@ -20,7 +35,7 @@ const Navbar: React.FC = () => {
   };
 
   const handleLogout = () => {
-    logout(); 
+    logout();
     navigate("/login");
     handleClose();
   };
@@ -28,6 +43,18 @@ const Navbar: React.FC = () => {
   const handleLogin = () => {
     navigate("/login");
     handleClose();
+  };
+
+  const handleRoute = () => {
+    navigate("/manage-products");
+  };
+
+  const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
   };
 
   return (
@@ -56,13 +83,56 @@ const Navbar: React.FC = () => {
             Cart ({cart.length})
           </Button>
 
-          <Button
-            color="inherit"
-            onClick={handleClickOpen}
-            sx={{ fontWeight: 600, display: "flex", alignItems: "center" }}
-          >
-            {isAuthenticated ? `Welcome, ${userName}` : "Account"}
-          </Button>
+          {isAuthenticated ? (
+            <>
+              <IconButton onClick={handleMenuClick} sx={{ p: 0, ml: 2 }}>
+                <Avatar
+                  src={ userName === "asim" ? "https://github.com/AsimAliMurtaza/resources/blob/main/pfp-200kb.jpg?raw=true" : ""}
+                  alt="Profile Picture"
+                  sx={{
+                    width: 35,
+                    height: 35,
+                    border: "1px solid teal",
+                    cursor: "pointer",
+                  }}
+                />
+              </IconButton>
+              <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleMenuClose}
+                sx={{ mt: "45px" }}
+              >
+                <MenuItem
+                  onClick={() => {
+                    handleLogout();
+                    handleMenuClose();
+                  }}
+                >
+                  Sign Out
+                </MenuItem>
+                {userName === "asim" && (
+                  <MenuItem
+                    onClick={() => {
+                      handleRoute();
+                      handleMenuClose();
+                    }}
+                  >
+                    Manage Products
+                  </MenuItem>
+                )}
+              </Menu>
+            </>
+          ) : (
+            <Button
+              variant="outlined"
+              color="inherit"
+              size="small"
+              onClick={handleLogin}
+            >
+              Sign In
+            </Button>
+          )}
         </Toolbar>
       </Container>
 
