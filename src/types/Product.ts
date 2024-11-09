@@ -5,6 +5,6 @@ export interface Product {
     price: number;
     category: string;
     image?: string;
-    quantity?: number; // Added quantity property
+    quantity?: number; 
   }
   

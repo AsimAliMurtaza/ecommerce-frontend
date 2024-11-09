@@ -15,35 +15,32 @@ const LoginForm: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(false); // Track if login is in progress
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false); // Track successful authentication
+  const [isLoading, setIsLoading] = useState<boolean>(false); 
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false); 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true); // Set loading state to true
-    setError(""); // Clear any previous error
+    setIsLoading(true); 
+    setError(""); 
 
     try {
-      const response = await login(email, password); // Make login request
+      const response = await login(email, password);
 
-      // Check if response contains the necessary fields (token and name)
       if (response && response.token && response.name) {
-        localStorage.setItem("token", response.token); // Store token
-        localStorage.setItem("userName", response.name); // Store userName
-        setIsAuthenticated(true); // Update authentication state
-        setIsLoading(false); // Reset loading state after login attempt
+        localStorage.setItem("token", response.token); 
+        localStorage.setItem("userName", response.name); 
+        setIsAuthenticated(true); 
+        setIsLoading(false); 
 
-        // Redirect after a 3-second delay
         setTimeout(() => {
-          navigate("/"); // Redirect to homepage or another page
-        }, 3000); // 3 seconds timeout
+          navigate("/");
+        }, 3000); 
       } else {
         setError("Login failed. Please check your credentials.");
       }
     } catch (error) {
-      // Handle errors (network, server, etc.)
       setError("Invalid credentials, please try again.");
     } finally {
-      setIsLoading(false); // Reset loading state after login attempt
+      setIsLoading(false);
     }
   };
 
@@ -77,13 +74,12 @@ const LoginForm: React.FC = () => {
           margin="normal"
         />
 
-        {/* Disable the button if login is in progress */}
         <Button
           type="submit"
           variant="contained"
           fullWidth
           sx={{ mt: 2 }}
-          disabled={isLoading || isAuthenticated} // Disable if loading or already authenticated
+          disabled={isLoading || isAuthenticated} 
         >
           {isLoading ? (
             <CircularProgress size={24} sx={{ color: "black" }} />

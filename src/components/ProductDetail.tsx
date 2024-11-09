@@ -21,7 +21,7 @@ const ProductDetailPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [quantity, setQuantity] = useState<number>(1);
   const [error, setError] = useState<string | null>(null);
-  const [openSnackbar, setOpenSnackbar] = useState<boolean>(false); // Snackbar state
+  const [openSnackbar, setOpenSnackbar] = useState<boolean>(false); 
   const { addToCart } = useCart();
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const ProductDetailPage: React.FC = () => {
     if (product) {
       console.log("Adding product to cart:", product, "Quantity:", quantity);
       addToCart(product, quantity);
-      setOpenSnackbar(true); // Show snackbar when the product is added
+      setOpenSnackbar(true); 
     }
   };
 
@@ -56,7 +56,7 @@ const ProductDetailPage: React.FC = () => {
   };
 
   const handleCloseSnackbar = () => {
-    setOpenSnackbar(false); // Close the snackbar
+    setOpenSnackbar(false); 
   };
 
   if (loading) {
@@ -146,7 +146,6 @@ const ProductDetailPage: React.FC = () => {
         </CardContent>
       </Card>
 
-      {/* Snackbar for success message */}
       <Snackbar
         open={openSnackbar}
         autoHideDuration={3000}

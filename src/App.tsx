@@ -8,11 +8,11 @@ import ProductPage from "./pages/ProductPage";
 import ProductDetailPage from "./components/ProductDetail";
 import CartPage from "./pages/CartPage";
 import { CartProvider } from "./contexts/CartContext";
-import { AuthProvider } from "./contexts/AuthContext"; // Import AuthProvider
+import { AuthProvider } from "./contexts/AuthContext";
 
 const App: React.FC = () => {
   return (
-    <AuthProvider> {/* Wrap app with AuthProvider */}
+    <AuthProvider>
       <CartProvider>
         <Router>
           <Navbar />

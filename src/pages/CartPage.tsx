@@ -25,7 +25,7 @@ const ToastNotification = ({ message }: { message: string }) => (
 
 const CartPage: React.FC = () => {
   const { cart, removeFromCart, clearCart } = useCart();
-  const [toastMessage, setToastMessage] = useState<string | null>(null); // State for Toast
+  const [toastMessage, setToastMessage] = useState<string | null>(null); 
   const [isToastVisible, setIsToastVisible] = useState<boolean>(false);
 
   const calculateTotal = (): number => {
@@ -34,10 +34,10 @@ const CartPage: React.FC = () => {
 
   const handleCheckout = () => {
     setToastMessage("Payment successful! Your cart has been cleared.");
-    setIsToastVisible(true); // Show the success message
+    setIsToastVisible(true); 
     setTimeout(() => {
-      clearCart(); // Clear the cart after 1 second delay to show the message
-      setIsToastVisible(false); // Hide the message after 3 seconds
+      clearCart(); 
+      setIsToastVisible(false); 
     }, 1000); 
   };
 
@@ -99,13 +99,12 @@ const CartPage: React.FC = () => {
           variant="contained"
           color="primary"
           sx={{ marginTop: 2 }}
-          onClick={handleCheckout} // Trigger checkout
+          onClick={handleCheckout}
         >
           Proceed to Checkout
         </Button>
       </Box>
 
-      {/* Toast Notification */}
       {isToastVisible && <ToastNotification message={toastMessage!} />}
     </Box>
   );

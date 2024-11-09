@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { AppBar, Toolbar, Typography, Button, IconButton, Container, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext"; // Use context to access auth state
+import { useAuth } from "../contexts/AuthContext"; 
 import { useCart } from "../contexts/CartContext";
 
 const Navbar: React.FC = () => {
-  const { isAuthenticated, userName, logout } = useAuth(); // Access auth context
+  const { isAuthenticated, userName, logout } = useAuth(); 
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
   const { cart } = useCart();
@@ -20,9 +20,9 @@ const Navbar: React.FC = () => {
   };
 
   const handleLogout = () => {
-    logout(); // Use logout from context
-    navigate("/login"); // Redirect to login page
-    handleClose(); // Close the modal
+    logout(); 
+    navigate("/login");
+    handleClose();
   };
 
   const handleLogin = () => {
@@ -56,7 +56,6 @@ const Navbar: React.FC = () => {
             Cart ({cart.length})
           </Button>
 
-          {/* Profile Section to Open Modal */}
           <Button
             color="inherit"
             onClick={handleClickOpen}
@@ -67,7 +66,6 @@ const Navbar: React.FC = () => {
         </Toolbar>
       </Container>
 
-      {/* Modal for Login/Logout Options */}
       <Dialog open={openModal} onClose={handleClose}>
         <DialogTitle>{isAuthenticated ? "Logout" : "Login"}</DialogTitle>
         <DialogContent>

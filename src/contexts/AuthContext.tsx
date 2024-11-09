@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-// Define the AuthContext type to include isAuthenticated, userName, login, and logout
 interface AuthContextType {
   isAuthenticated: boolean;
   userName: string | null;
@@ -18,7 +17,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [userName, setUserName] = useState<string | null>(null);
 
-  // Initialize the state from localStorage when the app loads
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     const storedUserName = localStorage.getItem("userName");
@@ -29,7 +27,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   }, []);
 
-  // Store user information to localStorage when updated
   const login = (token: string, userName: string) => {
     localStorage.setItem("token", token);
     localStorage.setItem("userName", userName);
@@ -51,7 +48,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   );
 };
 
-// Custom hook to use the AuthContext
 export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
   if (!context) {

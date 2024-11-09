@@ -8,16 +8,13 @@ export const login = async (email: string, password: string) => {
       body: JSON.stringify({ email, password }),
     });
 
-    // Check if the response status is ok (status code 2xx)
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(errorData.message || "Login failed"); // Throw custom error message
+      throw new Error(errorData.message || "Login failed"); 
     }
 
-    // If response is OK, parse the response JSON
     return response.json();
   } catch (error) {
-    // Catch any errors, including network errors
     console.error("Login Error:", error);
     throw new Error("Invalid credentials");
   }
