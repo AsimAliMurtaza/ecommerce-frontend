@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { getProducts } from "../api/products";
 import { Product } from "../types/Product";
-import { Card, CardContent, Typography, Grid, Box } from "@mui/material";
+import { Card, CardContent, Typography, Grid, Box, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const ProductList: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -13,6 +15,10 @@ const ProductList: React.FC = () => {
     };
     fetchProducts();
   }, []);
+
+  const handleBuyClick = (productId: string) => {
+    navigate(`/product/${productId}`); 
+  };
 
   return (
     <Box sx={{ padding: 4, backgroundColor: "#f5f5f5" }}>
@@ -46,7 +52,7 @@ const ProductList: React.FC = () => {
                     marginBottom: 1,
                   }}
                 >
-                  {product.name}
+                  {product.name} + {product._id}
                 </Typography>
                 <Typography
                   variant="body2"
@@ -67,6 +73,14 @@ const ProductList: React.FC = () => {
                 >
                   ${product.price}
                 </Typography>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  sx={{ marginTop: 2, padding: "10px 20px" }}
+                  onClick={() => handleBuyClick(product._id)}
+                >
+                  Buy Now
+                </Button>
               </CardContent>
             </Card>
           </Grid>

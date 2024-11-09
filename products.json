@@ -1,69 +1,59 @@
 [
     {
-      "_id": "1",
       "name": "Brown Brim",
       "description": "A stylish brown brim hat.",
       "price": 25,
       "category": "Clothing"
     },
     {
-      "_id": "2",
       "name": "Blue Beanie",
       "description": "A warm blue beanie.",
       "price": 18,
       "category": "Clothing"
     },
     {
-      "_id": "3",
       "name": "Brown Cowboy",
       "description": "A rugged brown cowboy hat.",
       "price": 35,
       "category": "Clothing"
     },
     {
-      "_id": "4",
       "name": "Grey Brim",
       "description": "A sleek grey brim hat.",
       "price": 25,
       "category": "Clothing"
     },
     {
-      "_id": "5",
       "name": "Green Beanie",
       "description": "A cozy green beanie.",
       "price": 18,
       "category": "Clothing"
     },
     {
-      "_id": "6",
       "name": "Palm Tree Cap",
       "description": "A cool palm tree cap.",
       "price": 14,
       "category": "Clothing"
     },
     {
-      "_id": "7",
       "name": "Red Beanie",
       "description": "A vibrant red beanie.",
       "price": 18,
       "category": "Clothing"
     },
     {
-      "_id": "8",
       "name": "Wolf Cap",
       "description": "A fierce wolf cap.",
       "price": 14,
       "category": "Clothing"
     },
     {
-      "_id": "9",
       "name": "Blue Snapback",
       "description": "A trendy blue snapback.",
       "price": 16,
       "category": "Clothing"
     },
     {
-      "_id": "10",
       "name": "Adidas NMD",
       "description": "Comfortable and stylish Adidas NMD.",
       "price": 220,

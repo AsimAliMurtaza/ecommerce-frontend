@@ -5,6 +5,7 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import Navbar from './components/Navbar';
 import ProductPage from './pages/ProductPage';
+import ProductDetailPage from './components/ProductDetail';
 
 const App: React.FC = () => {
     return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
                 <Route path="/products" element={<ProductPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/signup" element={<SignupPage />} />
+                <Route path="/product/:productId" element={<ProductDetailPage />} />
             </Routes>
         </Router>
     );

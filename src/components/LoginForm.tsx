@@ -13,7 +13,7 @@ const LoginForm: React.FC = () => {
     e.preventDefault();
     try {
       const response = await login(email, password);
-      console.log(response); // Handle response and store token if needed
+      console.log(response);
       navigate("/");
     } catch (err) {
       setError("Invalid credentials, please try again.");

@@ -28,3 +28,12 @@ export const updateProduct = async (id: string, product: Partial<Product>): Prom
 export const deleteProduct = async (id: string): Promise<void> => {
     await fetch(`${API_URL}/products/${id}`, { method: 'DELETE' });
 };
+
+
+export const getProductById = async (id: string): Promise<Product> => {
+    const response = await fetch(`${API_URL}/products/${id}`);
+    if (!response.ok) {
+      throw new Error("Product not found");
+    }
+    return response.json();
+  };

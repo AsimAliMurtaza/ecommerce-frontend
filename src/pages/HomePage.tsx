@@ -30,7 +30,6 @@ const HomePage: React.FC = () => (
       </Button>
     </Container>
 
-    {/* Featured Products Section */}
     <Container maxWidth="lg" sx={{ marginBottom: 5 }}>
       <Typography
         variant="h4"
