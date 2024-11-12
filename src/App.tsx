@@ -9,8 +9,8 @@ import ProductDetailPage from "./components/ProductDetail";
 import CartPage from "./pages/CartPage";
 import { CartProvider } from "./contexts/CartContext";
 import { AuthProvider } from "./contexts/AuthContext";
-import { ManageAccounts } from "@mui/icons-material";
 import ManageProductsPage from "./pages/ManageProductsPage";
+import Footer from "./components/Footer";
 
 const App: React.FC = () => {
   return (
@@ -27,6 +27,7 @@ const App: React.FC = () => {
             <Route path="/cart" element={<CartPage />} />
             <Route path="manage-products" element={<ManageProductsPage />} />
           </Routes>
+          <Footer />
         </Router>
       </CartProvider>
     </AuthProvider>

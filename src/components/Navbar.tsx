@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -14,16 +14,16 @@ import {
   DialogContent,
   DialogTitle,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+import { ShoppingBag } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { useCart } from "../contexts/CartContext";
 
 const Navbar: React.FC = () => {
-  const { isAuthenticated, userName, logout } = useAuth(); // Assume `session` contains the user info
+  const { isAuthenticated, userName, logout } = useAuth();
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null); // Anchor for MUI Menu
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { cart } = useCart();
 
   const handleClickOpen = () => {
@@ -57,9 +57,13 @@ const Navbar: React.FC = () => {
     setAnchorEl(null);
   };
 
+  useEffect(() => {if(isAuthenticated){
+    console.log("User is authenticated", isAuthenticated);
+  }}, [isAuthenticated]);
+
   return (
     <AppBar position="sticky" sx={{ backgroundColor: "#1976d2" }}>
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <Toolbar>
           <IconButton
             edge="start"
@@ -67,7 +71,7 @@ const Navbar: React.FC = () => {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+            <ShoppingBag />
           </IconButton>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             <Link to="/" style={{ textDecoration: "none", color: "white" }}>
@@ -87,7 +91,11 @@ const Navbar: React.FC = () => {
             <>
               <IconButton onClick={handleMenuClick} sx={{ p: 0, ml: 2 }}>
                 <Avatar
-                  src={ userName === "asim" ? "https://github.com/AsimAliMurtaza/resources/blob/main/pfp-200kb.jpg?raw=true" : ""}
+                  src={
+                    userName === "asim"
+                      ? "https://github.com/AsimAliMurtaza/resources/blob/main/pfp-200kb.jpg?raw=true"
+                      : ""
+                  }
                   alt="Profile Picture"
                   sx={{
                     width: 35,

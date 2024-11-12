@@ -1,9 +1,13 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { signin } from "../api/auth";
 
 interface AuthContextType {
   isAuthenticated: boolean;
   userName: string | null;
-  login: (token: string, userName: string) => void;
+  login: (
+    email: string,
+    password: string
+  ) => Promise<{ token: string; name: string } | void>;
   logout: () => void;
 }
 
@@ -27,11 +31,28 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   }, []);
 
-  const login = (token: string, userName: string) => {
-    localStorage.setItem("token", token);
-    localStorage.setItem("userName", userName);
-    setIsAuthenticated(true);
-    setUserName(userName);
+  const login = async (
+    email: string,
+    password: string
+  ): Promise<{ token: string; name: string } | void> => {
+    try {
+      const res = await signin(email, password);
+
+      if (res && res.token && res.name) {
+        localStorage.setItem("token", res.token);
+        localStorage.setItem("userName", res.name);
+
+        setIsAuthenticated(true);
+        setUserName(res.userName);
+
+        return { token: res.token, name: res.name };
+      } else {
+        throw new Error("Authentication failed. Invalid response format.");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      throw new Error("Login failed. Please try again.");
+    }
   };
 
   const logout = () => {

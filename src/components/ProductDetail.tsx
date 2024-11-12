@@ -96,11 +96,11 @@ const ProductDetailPage: React.FC = () => {
   }
 
   return (
-    <Box sx={{ padding: 4 }}>
+    <Box sx={{ padding: 4}}>
       <Card
         sx={{
           display: "flex",
-          maxWidth: 900,
+          maxWidth: 1000,
           margin: "auto",
           justifyContent: "center",
         }}

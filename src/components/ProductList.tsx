@@ -28,7 +28,7 @@ const ProductList: React.FC = () => {
   };
 
   return (
-    <Box sx={{ padding: 4, backgroundColor: "#f5f5f5" }}>
+    <Box sx={{ padding: 4, backgroundColor: "#f5f5f5", width: "full" }}>
       <Grid
         container
         spacing={2}

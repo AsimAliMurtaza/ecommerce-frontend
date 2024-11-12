@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Box, Typography, Button, Card, CardContent, Grid } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Button,
+  Card,
+  CardContent,
+  Grid,
+} from "@mui/material";
 import { useCart } from "../contexts/CartContext";
 import { Product } from "../types/Product";
 import { Link } from "react-router-dom";
@@ -25,26 +32,30 @@ const ToastNotification = ({ message }: { message: string }) => (
 
 const CartPage: React.FC = () => {
   const { cart, removeFromCart, clearCart } = useCart();
-  const [toastMessage, setToastMessage] = useState<string | null>(null); 
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [isToastVisible, setIsToastVisible] = useState<boolean>(false);
 
   const calculateTotal = (): number => {
-    return cart.reduce((total: number, product: Product) => total + (product.price * (product.quantity || 1)), 0);
+    return cart.reduce(
+      (total: number, product: Product) =>
+        total + product.price * (product.quantity || 1),
+      0
+    );
   };
 
   const handleCheckout = () => {
     setToastMessage("Payment successful! Your cart has been cleared.");
-    setIsToastVisible(true); 
+    setIsToastVisible(true);
     setTimeout(() => {
-      clearCart(); 
-      setIsToastVisible(false); 
-    }, 1000); 
+      clearCart();
+      setIsToastVisible(false);
+    }, 1000);
   };
 
   if (cart.length === 0) {
     return (
       <Box sx={{ padding: 4, textAlign: "center" }}>
-        <Typography variant="h4" sx={{ marginBottom: 2 }}>
+        <Typography variant="h4" sx={{ marginBottom: 2, height: "30vh" }}>
           Your Cart is Empty
         </Typography>
         <Link to="/" style={{ textDecoration: "none" }}>
@@ -70,7 +81,9 @@ const CartPage: React.FC = () => {
                 <Typography variant="h6">{product.name}</Typography>
                 <Typography variant="body2">{product.description}</Typography>
                 <Typography variant="h6">${product.price}</Typography>
-                <Typography variant="body2">Quantity: {product.quantity}</Typography>
+                <Typography variant="body2">
+                  Quantity: {product.quantity}
+                </Typography>
                 <Button
                   variant="outlined"
                   color="secondary"
@@ -86,7 +99,9 @@ const CartPage: React.FC = () => {
       </Grid>
 
       <Box sx={{ marginTop: 4, textAlign: "right" }}>
-        <Typography variant="h5">Total: ${calculateTotal().toFixed(2)}</Typography>
+        <Typography variant="h5">
+          Total: ${calculateTotal().toFixed(2)}
+        </Typography>
         <Button
           variant="contained"
           color="secondary"

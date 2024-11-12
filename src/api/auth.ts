@@ -1,6 +1,6 @@
 const API_URL = "http://localhost:5000";
 
-export const login = async (email: string, password: string) => {
+export const signin = async (email: string, password: string) => {
   try {
     const response = await fetch(`${API_URL}/auth/login`, {
       method: "POST",
@@ -10,10 +10,16 @@ export const login = async (email: string, password: string) => {
 
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(errorData.message || "Login failed"); 
+      throw new Error(errorData.message || "Login failed");
     }
 
-    return response.json();
+    const data = await response.json();
+    console.log("Login response:", data);
+    if (!data.token || !data.name) {
+      throw new Error("Invalid response format from server.");
+    }
+
+    return data;
   } catch (error) {
     console.error("Login Error:", error);
     throw new Error("Invalid credentials");
