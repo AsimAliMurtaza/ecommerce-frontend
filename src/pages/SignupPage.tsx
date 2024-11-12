@@ -1,10 +1,11 @@
 import React from "react";
 import SignupForm from "../components/SignupForm";
+import { Container } from "@mui/material";
 
 const SignupPage: React.FC = () => (
-  <div>
+  <Container maxWidth="xs" sx={{ mt: 5, mb: 12 }}>
     <SignupForm />
-  </div>
+  </Container>
 );
 
 export default SignupPage;

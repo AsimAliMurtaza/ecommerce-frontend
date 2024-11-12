@@ -3,7 +3,6 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableContainer,
   TableHead,
   TableRow,
   Paper,
@@ -26,7 +25,6 @@ interface Product {
   category: string;
 }
 
-// Styled components for cleaner and reusable styling
 const StyledTableContainer = styled(Paper)(({ theme }) => ({
   marginTop: theme.spacing(3),
   borderRadius: theme.shape.borderRadius,

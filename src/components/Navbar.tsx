@@ -136,6 +136,11 @@ const Navbar: React.FC = () => {
               variant="outlined"
               color="inherit"
               size="small"
+              sx={{
+                borderColor: "white",
+                display: { xs: "none", sm: "block" },
+                padding: "6px 10px",
+              }}
               onClick={handleLogin}
             >
               Sign In

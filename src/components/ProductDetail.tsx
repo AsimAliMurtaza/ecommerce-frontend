@@ -16,6 +16,7 @@ import { getProductById } from "../api/products";
 import { useCart } from "../contexts/CartContext";
 
 const ProductDetailPage: React.FC = () => {
+
   const { productId } = useParams();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -39,7 +40,7 @@ const ProductDetailPage: React.FC = () => {
         setLoading(false);
       }
     };
-
+    
     fetchProduct();
   }, [productId]);
 

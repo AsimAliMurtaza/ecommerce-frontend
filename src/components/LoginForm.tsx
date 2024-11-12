@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useAuth } from "../contexts/AuthContext"; // Import AuthContext
+import { useAuth } from "../contexts/AuthContext"; 
 import { useNavigate } from "react-router-dom";
 import {
   TextField,
@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 
 const LoginForm: React.FC = () => {
-  const { login } = useAuth(); // Use login function from AuthContext
+  const { login } = useAuth(); 
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -40,7 +40,7 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <Container maxWidth="xs" sx={{ mt: 5 }}>
+    <Container maxWidth="xs" sx={{ mt: 5, mb: 5 }}>
       {error && (
         <Typography
           variant="body2"
